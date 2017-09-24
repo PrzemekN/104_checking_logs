@@ -52,6 +52,7 @@ nazwaPliku='c:\\testy\\summary'+startlocaltimeformatted+'.log'
 podsumowanie=open(nazwaPliku, 'w')
 podsumowanie.write(sys.argv[0]+"\n")
 podsumowanie.write(sys.argv[1]+"\n")
+podsumowanie.write(sys.argv[2]+"\n")
 
 #przejscie po podkatalogach w katalogu okreslonym jako wywolanie arg[2]
 for k in range(0,quantity_of_folders):
