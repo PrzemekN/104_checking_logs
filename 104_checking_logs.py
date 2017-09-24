@@ -1,4 +1,4 @@
-#Przemek Nawrocki 08.2017 ver 2.0
+# Przemek Nawrocki 08.2017 ver 2.1
 """
 |_Folder
     |_subFolder
@@ -15,18 +15,19 @@ print([f for f in os.listdir(dirname)
 import glob
 import sys
 import time
-import mmap
+# import mmap
 # checking how many params were passed out, if less than 2 then stop
-# first arg should be name of the aplication - actually not implemented, but you must give any first arg ! for example: not_impl
-# second arg should be path for folder in which there are subfolders for example: c:\testy
-# whole call should looks like this for example: python c:\<folder>\python_script.py not_impl c:\testy
+# first arg should be: string we are looking for, for example: ERROR
+# second arg should be: path for folder in which there are subfolders for example: c:\testy
+# whole call should looks like this, for example: python c:\<folder>\python_script.py error c:\testy
 quantity_of_argv = len(sys.argv)
-if quantity_of_argv <= 2:
+# argumenty liczymy od zera gdzie zero to nazwa skryptu
+if quantity_of_argv < 3:
     print("missing arguments, we need 2 arguments")
-    print("for example: skrypt.py arg1-not_implement_yet c:\katalog")
+    print("for example: skrypt.py <arg1> <arg2>")
     sys.exit(0)
 # pobieranie czasu startu skryptu   
-startlocaltime = time.asctime( time.localtime(time.time()) )
+startlocaltime = time.asctime(time.localtime(time.time()))
 #---------------
 for i in range(1,len(sys.argv)):
     print ("tArgument",i, ":",sys.argv[i])
@@ -49,6 +50,8 @@ startlocaltimeformatted=startlocaltime.replace(':','')
 startlocaltimeformatted=startlocaltimeformatted.replace(' ','')
 nazwaPliku='c:\\testy\\summary'+startlocaltimeformatted+'.log'
 podsumowanie=open(nazwaPliku, 'w')
+podsumowanie.write(sys.argv[0])
+podsumowanie.write(sys.argv[1])
 
 #przejscie po podkatalogach w katalogu okreslonym jako wywolanie arg[2]
 for k in range(0,quantity_of_folders):
@@ -62,7 +65,7 @@ for k in range(0,quantity_of_folders):
        with open(files_list[j]) as file:
            for line in file:
                #if 'ERROR' in line:
-               if 'WARNING' in line:
+               if sys.argv[1] in line:
                    line= line.replace("  ", "")                   
                    podsumowanie.write(line)   
                    print(line)
