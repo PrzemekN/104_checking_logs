@@ -19,18 +19,19 @@ import time
 # checking how many params were passed out, if less than 2 then stop
 # first arg should be: string we are looking for, for example: ERROR
 # second arg should be: path for folder in which there are subfolders for example: c:\testy
-# whole call should looks like this, for example: python c:\<folder>\python_script.py error c:\testy
+# third arg indicate that seeking will be case sensitive or not, not mandatory,0 means Case sensitive, 1 means not case sensitivie,
+# whole call should looks like this, for example: python c:\<folder>\python_script.py error c:\testy 1
 quantity_of_argv = len(sys.argv)
 # argumenty liczymy od zera gdzie zero to nazwa skryptu
 if quantity_of_argv < 3:
-    print("missing arguments, we need 2 arguments")
+    print("missing arguments, we need at least 2 arguments")
     print("for example: skrypt.py <arg1> <arg2>")
     sys.exit(0)
 # pobieranie czasu startu skryptu   
 startlocaltime = time.asctime(time.localtime(time.time()))
 #---------------
 for i in range(1,len(sys.argv)):
-    print ("tArgument",i, ":",sys.argv[i])
+    print ("Argument",i, ":",sys.argv[i])
 #---------------  
 #storing list of folders 
 folders_list = glob.glob(sys.argv[2] + '\\*\\')
